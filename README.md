@@ -1,10 +1,10 @@
-##Course Overview
+## Course Overview
 coming soon
 
-##Getting Started
+## Getting Started
 coming soon
 
-##Understanding Activities and Activity Layout Interactio
+## Understanding Activities and Activity Layout Interactio
 
 Continue the NoteKeeper Application.
 
