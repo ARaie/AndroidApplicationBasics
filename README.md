@@ -4,7 +4,7 @@ coming soon
 ## Getting Started
 coming soon
 
-## Understanding Activities and Activity Layout Interactio
+## Understanding Activities and Activity Layout Interaction
 
 Continue the NoteKeeper Application.
 
@@ -33,6 +33,27 @@ This module is about:
 	* More Java code to NoteActivity(Spinner info comes from pasted files)
 		* R class provides important constants: Layout resources - R.layout, View Id's - R.Id
 
+## Working with Activities
+
+* Activity Interaction
+	* Create an intent
+		* Identifies the desired Activity
+		* Can ve just Activity class info
+	* Call startActivity
+		* Pass the intent
+		* Launches Activity matching the intent
+	* Choose ListView and match to whole screen then go to java classes
+
+* Describing Operations with Intents
+	* Intents need more than just a target
+
+* Reference Types as Intent Extras
+	* Use Parselable API
+	* describeContents
+		* Indicates spetial behaviour
+		* Generally can return 0
+	* writeToParcel
+		* Receives a Parcel instance
 
 
 
