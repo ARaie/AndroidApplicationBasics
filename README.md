@@ -55,5 +55,27 @@ This module is about:
 	* writeToParcel
 		* Receives a Parcel instance
 
+## Taking a Deeper Look at Activity Interaction
 
+* Application Activity RelationShip
+	* Android is a component-oriented platform
+		* Components run within a process
+	* Each app has its own protcess
+	* App components run in same protcess
+* Implicit Intents
+	* How to send email from yor app to another app
+* Activities with Results
+	* For example camera Activity
+	* startActivityForResult
+	* Parameters received by onActivityResult
+		* Ap defined integer identifier
+		* Result code
+		* Indent - contains activity result
+* Acticity Tasks
+	* Task is a collection of activities that users interact with when performing a certain job
+	* Manage as a stack
+		* Known as the back stack
+	* Activities added going forward
+	* Back button removes Activities
+		* Causes Activity to be destroyed
 
