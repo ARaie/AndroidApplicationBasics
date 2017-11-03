@@ -40,6 +40,8 @@ public class NoteListActivity extends AppCompatActivity {
         mAdapterNotes.notifyDataSetChanged();
     }
 
+
+
     private void initializeDisplayContent() {
         final ListView listNotes = (ListView) findViewById(R.id.list_notes);
 

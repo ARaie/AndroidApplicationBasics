@@ -1,8 +1,12 @@
 ## Course Overview
-coming soon
+
+* Choose Basic Activity
+* Start with content_main.xml
+* About MyFirstApp
 
 ## Getting Started
-coming soon
+
+* Plans, design creatin new app
 
 ## Understanding Activities and Activity Layout Interaction
 
@@ -78,4 +82,16 @@ This module is about:
 	* Activities added going forward
 	* Back button removes Activities
 		* Causes Activity to be destroyed
+
+## Understanding Activity Lifecycle
+
+* Activity lifecycle
+	* Total lifetime
+	* Visible lifetime
+	* Foreground lifetime
+	* Methods for start/end of each lifetime
+* Activity state management
+	* Activities often destroyed and restored
+	* Save state in onSaveInstanceState
+	* Saved state passed to onCreate
 
