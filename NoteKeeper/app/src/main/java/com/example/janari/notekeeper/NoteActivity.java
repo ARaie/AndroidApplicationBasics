@@ -36,12 +36,21 @@ public class NoteActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Et spinner ühendada oma koodi
+
         mSpinnerCourses = (Spinner) findViewById(R.id.spinner_courses);
 
+        // Adapter et courseInfo spinneri sisse saada. Esmalt teeme listi courseInfoga, mis asuvad DataManageris
         List<CourseInfo> courses = DataManager.getInstance().getCourses();
+        //Adapter et ühendada see list spinneriga. Kontekst, resource, list mida me tahame sinna panna.This = current activity to the context
+        // Android pakub ise android.R.layout.see käib siis spinneri kohta, lõppu oma list
         ArrayAdapter<CourseInfo> adapterCourses =
                 new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, courses);
+
+        //et seostada dropdown list of courses
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        //See rida on selleks et seostada oma adapter spinneriga
         mSpinnerCourses.setAdapter(adapterCourses);
 
         readDisplayStateValues();

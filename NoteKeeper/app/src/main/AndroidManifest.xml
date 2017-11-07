@@ -15,8 +15,12 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+
+        <!--parem klikk ja Got to -> Declaration title_activity_note  - list maha value Edit Note -->
+        <!--ta vahetab siin nimed ka ära et kumb sulle ikooni alt kuvatakse. Et milline see peavaade on ja ainult ühele jääb Launcher/intent-filter-->
         <activity
             android:name=".NoteListActivity"
+
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

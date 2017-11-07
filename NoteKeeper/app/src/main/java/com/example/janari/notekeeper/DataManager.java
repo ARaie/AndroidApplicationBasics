@@ -13,6 +13,8 @@ public class DataManager {
     private List<CourseInfo> mCourses = new ArrayList<>();
     private List<NoteInfo> mNotes = new ArrayList<>();
 
+
+    // See annab meile tagasi ühe instantsi. Tegitab instantsi, initsialiseerib kattesaadavad instantsid ja paneb näidis noutsi sinna
     public static DataManager getInstance() {
         if(ourInstance == null) {
             ourInstance = new DataManager();
@@ -53,6 +55,8 @@ public class DataManager {
         mNotes.remove(index);
     }
 
+
+    // annab tagasi listti coursesitest.
     public List<CourseInfo> getCourses() {
         return mCourses;
     }

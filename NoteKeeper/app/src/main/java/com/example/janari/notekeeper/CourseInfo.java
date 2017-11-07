@@ -61,7 +61,7 @@ public final class CourseInfo implements Parcelable {
         }
         return null;
     }
-
+// Sest spinner näitab string tüüpi sisu
     @Override
     public String toString() {
         return mTitle;

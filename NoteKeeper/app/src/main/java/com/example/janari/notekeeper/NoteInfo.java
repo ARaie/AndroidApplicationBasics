@@ -6,7 +6,10 @@ import android.os.Parcelable;
 /**
  * Created by Jim.
  */
+// et seda kasutatavaks teha peab lisama Parcelabel et indente ühelt activitylt teisele saata
 public final class NoteInfo implements Parcelable {
+
+    //Members of the course
     private CourseInfo mCourse;
     private String mTitle;
     private String mText;
@@ -17,6 +20,7 @@ public final class NoteInfo implements Parcelable {
         mText = text;
     }
 
+    //see oligi vajalik konstruktor souce jaoks
     private NoteInfo(Parcel source) {
         mCourse = source.readParcelable(CourseInfo.class.getClassLoader());
         mTitle = source.readString();
@@ -76,6 +80,8 @@ public final class NoteInfo implements Parcelable {
         return 0;
     }
 
+
+    // paneme nad Parcelabelisse. kirjutab meie komponendid parselisse
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(mCourse, 0);
@@ -83,15 +89,17 @@ public final class NoteInfo implements Parcelable {
         dest.writeString(mText);
     }
 
+    // meie creator on nüüd võimeline genereerima instance noteInfost
     public final static Parcelable.Creator<NoteInfo> CREATOR =
+            //siin on vaja teha implement methods, punane pirn pakub seda ise ja tehakse kaks publikut valmis
             new Parcelable.Creator<NoteInfo>() {
 
-                @Override
+                @Override//siin tahtis konstruktorit teha
                 public NoteInfo createFromParcel(Parcel source) {
                     return new NoteInfo(source);
                 }
 
-                @Override
+                @Override//siia lõppu panin 0 asemel size
                 public NoteInfo[] newArray(int size) {
                     return new NoteInfo[size];
                 }

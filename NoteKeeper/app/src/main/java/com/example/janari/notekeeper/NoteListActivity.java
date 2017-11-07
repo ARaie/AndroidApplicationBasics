@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import java.util.List;
 
+//parem klik ja New -> Activity -> Gallery
+
 public class NoteListActivity extends AppCompatActivity {
 
     private ArrayAdapter<NoteInfo> mAdapterNotes;
@@ -41,22 +43,36 @@ public class NoteListActivity extends AppCompatActivity {
     }
 
 
+    // täita note list
 
     private void initializeDisplayContent() {
+        //reference to listView. list_notes oli välja ID nimi
         final ListView listNotes = (ListView) findViewById(R.id.list_notes);
 
+        //et saada sinna kontekst sisse DataManagerist ja just notsid
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
+        //kasutame jälle array adapterit
         mAdapterNotes = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
 
+        //et seostada adapter listViewga
         listNotes.setAdapter(mAdapterNotes);
 
+        //kui kasutaja klikib ja valib midagi listViewst.
         listNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { // see on kokku surutud aga pm seostab view clikeriga
+
+                //intent identifitseerib tegevuse millest me laustame. Activityd on tegelikult tüüp kontekstist ja teine on class
                 Intent intent = new Intent(NoteListActivity.this, NoteActivity.class);
+
+                //et saata info ühest activityst teise intendiga
 //                NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);
+                //selle NOTE jaoks pidi tegema NoteActivitisse tegema public static finali
+                //ja kui nüüd kasutaja teeb valiku listist, see note on nüüd pakitud intenti ja saadetud üle noteActiviti
                 intent.putExtra(NoteActivity.NOTE_POSITION, position);
+                //käivitab activity
                 startActivity(intent);
+                
             }
         });
     }
