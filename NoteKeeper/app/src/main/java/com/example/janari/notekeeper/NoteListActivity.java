@@ -26,6 +26,8 @@ public class NoteListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        //loome intenti nimega startActivity. Annab edasi this väärtuse noteActicity classile
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,7 +38,7 @@ public class NoteListActivity extends AppCompatActivity {
         initializeDisplayContent();
     }
 
-    @Override
+    @Override//anname arrayAdapterile teada et data on muutunud
     protected void onResume() {
         super.onResume();
         mAdapterNotes.notifyDataSetChanged();
@@ -65,10 +67,14 @@ public class NoteListActivity extends AppCompatActivity {
                 //intent identifitseerib tegevuse millest me laustame. Activityd on tegelikult tüüp kontekstist ja teine on class
                 Intent intent = new Intent(NoteListActivity.this, NoteActivity.class);
 
+
+                //nüüd kui keegi teeb valiku meie listist siis antakse position meile, pannakse ta intent extrasse ja saadetakse teise intenti et alustada uut activityt
+
                 //et saata info ühest activityst teise intendiga
-//                NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);
+//                NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);<<seda pole enam vaja
                 //selle NOTE jaoks pidi tegema NoteActivitisse tegema public static finali
                 //ja kui nüüd kasutaja teeb valiku listist, see note on nüüd pakitud intenti ja saadetud üle noteActiviti
+                //See oli enne NOTE_INFO. enne oli note aga nüüd sai position
                 intent.putExtra(NoteActivity.NOTE_POSITION, position);
                 //käivitab activity
                 startActivity(intent);

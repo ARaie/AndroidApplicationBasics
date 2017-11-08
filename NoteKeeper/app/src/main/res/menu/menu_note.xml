@@ -2,6 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.janari.notekeeper.NoteActivity">
+
+    <!--siin ma saan oma menüüd muuta-->
     <item
         android:id="@+id/action_cancel"
         android:orderInCategory="100"
