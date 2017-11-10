@@ -64,7 +64,7 @@ public class NoteActivity extends AppCompatActivity {
             saveOriginalNoteValues();
         } else {
             restoreOriginalNoteValues(savedInstanceState);
-        }
+    }
 
         //Nendega sama lugu, meil on neid vaja kasutada ka väljaspool seda meetodit seega peavad naad saama fieldiks
 
