@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.List;
@@ -15,8 +18,9 @@ import java.util.List;
 //parem klik ja New -> Activity -> Gallery
 
 public class NoteListActivity extends AppCompatActivity {
+    private NoteRecyclerAdapter noteRecyclerAdapter;
 
-    private ArrayAdapter<NoteInfo> mAdapterNotes;
+    //private ArrayAdapter<NoteInfo> mAdapterNotes; see oli listviwe adapter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,46 +45,55 @@ public class NoteListActivity extends AppCompatActivity {
     @Override//anname arrayAdapterile teada et data on muutunud
     protected void onResume() {
         super.onResume();
-        mAdapterNotes.notifyDataSetChanged();
+       // mAdapterNotes.notifyDataSetChanged(); see oli ka listi jaoks
+        //et mu recycler kuvaks kõige värskemat infot
+        noteRecyclerAdapter.notifyDataSetChanged();
     }
 
 
     // täita note list
-
+// listview osa välja
     private void initializeDisplayContent() {
-        //reference to listView. list_notes oli välja ID nimi
-        final ListView listNotes = (ListView) findViewById(R.id.list_notes);
-
-        //et saada sinna kontekst sisse DataManagerist ja just notsid
-        List<NoteInfo> notes = DataManager.getInstance().getNotes();
-        //kasutame jälle array adapterit
-        mAdapterNotes = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
-
-        //et seostada adapter listViewga
-        listNotes.setAdapter(mAdapterNotes);
-
-        //kui kasutaja klikib ja valib midagi listViewst.
-        listNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { // see on kokku surutud aga pm seostab view clikeriga
-
-                //intent identifitseerib tegevuse millest me laustame. Activityd on tegelikult tüüp kontekstist ja teine on class
-                Intent intent = new Intent(NoteListActivity.this, NoteActivity.class);
-
-
-                //nüüd kui keegi teeb valiku meie listist siis antakse position meile, pannakse ta intent extrasse ja saadetakse teise intenti et alustada uut activityt
-
-                //et saata info ühest activityst teise intendiga
+//      //reference to listView. list_notes oli välja ID nimi
+//    final ListView listNotes = (ListView) findViewById(R.id.list_notes);
+//
+//      //et saada sinna kontekst sisse DataManagerist ja just notsid
+//    List<NoteInfo> notes = DataManager.getInstance().getNotes();
+//  //kasutame jälle array adapterit
+//mAdapterNotes = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
+//
+//      //et seostada adapter listViewga
+//    listNotes.setAdapter(mAdapterNotes);
+//
+//      //kui kasutaja klikib ja valib midagi listViewst.
+//    listNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//          @Override
+//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) { // see on kokku surutud aga pm seostab view clikeriga
+//
+//              //intent identifitseerib tegevuse millest me laustame. Activityd on tegelikult tüüp kontekstist ja teine on class
+//            Intent intent = new Intent(NoteListActivity.this, NoteActivity.class);
+//
+//
+//              //nüüd kui keegi teeb valiku meie listist siis antakse position meile, pannakse ta intent extrasse ja saadetakse teise intenti et alustada uut activityt
+//
+//              //et saata info ühest activityst teise intendiga
 //                NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);<<seda pole enam vaja
-                //selle NOTE jaoks pidi tegema NoteActivitisse tegema public static finali
-                //ja kui nüüd kasutaja teeb valiku listist, see note on nüüd pakitud intenti ja saadetud üle noteActiviti
-                //See oli enne NOTE_INFO. enne oli note aga nüüd sai position
-                intent.putExtra(NoteActivity.NOTE_POSITION, position);
-                //käivitab activity
-                startActivity(intent);
+//            //selle NOTE jaoks pidi tegema NoteActivitisse tegema public static finali
+//          //ja kui nüüd kasutaja teeb valiku listist, see note on nüüd pakitud intenti ja saadetud üle noteActiviti
+//        //See oli enne NOTE_INFO. enne oli note aga nüüd sai position
+//      intent.putExtra(NoteActivity.NOTE_POSITION, position);
+//    //käivitab activity
+    //  startActivity(intent);
                 
-            }
-        });
+//           }
+//     });
+        final RecyclerView recyclerNotes = (RecyclerView) findViewById(R.id.list_notes);
+        final LinearLayoutManager notesLayoutManager = new LinearLayoutManager(this);
+        recyclerNotes.setLayoutManager(notesLayoutManager);
+
+        List<NoteInfo> notes = DataManager.getInstance().getNotes();
+        noteRecyclerAdapter = new NoteRecyclerAdapter(this, notes);
+        recyclerNotes.setAdapter(noteRecyclerAdapter);
     }
 
 }

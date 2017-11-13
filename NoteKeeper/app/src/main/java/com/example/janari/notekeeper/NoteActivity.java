@@ -205,9 +205,34 @@ public class NoteActivity extends AppCompatActivity {
             mIsCancelling = true;
             //see finish lõpetab nüüd tegevuse
             finish();
+        } else if (id == R.id.action_next){
+            moveNext();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //see meetod on selleks et kui kasutaja vajutab viimasele noutsile next et app siis ära ei sureks
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.action_next);
+        int lastNoteIndex = DataManager.getInstance().getNotes().size()-1;
+        item.setEnabled(mNotePosition < lastNoteIndex);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void moveNext() {
+        //igaksjuhuks salvestame ära
+        saveNote();
+
+        ++mNotePosition;
+        mNote = DataManager.getInstance().getNotes().get(mNotePosition);
+
+        //aga juhul kui kasutaja vajutab cancel siis jätame meelde originaalväärtused
+        saveOriginalNoteValues();
+        // ja alles siis kuvame järgmise noutsi
+        displayNote(mSpinnerCourses, mTextNoteTitle, mTextNoteText);
+        invalidateOptionsMenu();
     }
 
     private void sendEmail() {
