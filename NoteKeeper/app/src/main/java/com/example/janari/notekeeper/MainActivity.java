@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity
         recyclerItems = (RecyclerView) findViewById(R.id.list_items);
         notesLayoutManager = new LinearLayoutManager(this);
         //tahame et ta kuvaks coured nagu tabelina üksteise kõreval kastides
-        coursesLayoutManager = new GridLayoutManager(this, 2);
+        //aga nüüd me saame oma 2e resource failist values
+        coursesLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.couse_grid_span));
 
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
@@ -145,10 +146,11 @@ public class MainActivity extends AppCompatActivity
 
             displayCourses();
         }  else if (id == R.id.nav_share) {
-            handleSelection("Dont you think you have shared enough");
+            handleSelection(R.string.nav_share_message);
 
+            //kutsub messaged välja resource failist
         } else if (id == R.id.nav_send) {
-            handleSelection("Send");
+            handleSelection(R.string.nav_sed_message);
 
         }
 
@@ -157,11 +159,12 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void handleSelection(String message) {
+    //siin märkisime ära message_id et üleval ei peaks kasutama getStringi ees
+    private void handleSelection(int message_id) {
 
         //siis kui valid menüü pealt midagi siis alla hallile taustale tuleb riba sellest mis sa valisid
         View view = findViewById(R.id.list_items);
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(view, message_id, Snackbar.LENGTH_LONG).show();
 
     }
 }

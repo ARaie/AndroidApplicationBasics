@@ -25,7 +25,7 @@
         android:layout_below="@+id/spinner_courses"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Note Title"
+        android:hint="@string/note_title_hint"
         android:inputType="textMultiLine" />
 
     <EditText
@@ -36,7 +36,7 @@
         android:layout_below="@+id/text_note_title"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Note Text"
+        android:hint="@string/note_text_hint"
         android:inputType="textMultiLine" />
 
 </RelativeLayout>
